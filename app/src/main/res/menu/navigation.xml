@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_feed"
+        android:icon="@drawable/ic_action_whatshot"
+        android:title="@string/title_feed"/>
+
+    <item
+        android:id="@+id/navigation_albums"
+        android:icon="@drawable/ic_action_photo_album"
+        android:title="@string/title_albums"/>
+
+    <item
+        android:id="@+id/navigation_todos"
+        android:icon="@drawable/ic_action_event_note"
+        android:title="@string/title_todos"/>
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_action_person"
+        android:title="@string/title_profile"/>
+
+</menu>

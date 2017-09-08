@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ActivTrades</string>
+    <string name="title_feed">Feed</string>
+    <string name="title_albums">Albums</string>
+    <string name="title_todos">Todos</string>
+    <string name="title_profile">Profile</string>
+</resources>
