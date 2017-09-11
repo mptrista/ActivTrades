@@ -6,7 +6,6 @@ import android.view.inputmethod.InputMethodManager;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-
     public void hideSoftKeyboard() {
         if (getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);

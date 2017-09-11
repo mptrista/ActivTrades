@@ -1,8 +1,10 @@
-package com.toshkin.activtrades.app;
+package com.toshkin.activtrades.app.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.v7.app.AppCompatDelegate;
+
+import com.toshkin.activtrades.app.BaseFragment;
 
 /**
  * <p>The abstract base fragment that works with {@link BasePresenter}.</p>
@@ -27,14 +29,12 @@ public abstract class BasePresenterFragment<PresenterType extends BasePresenter>
      */
     protected abstract PresenterType createPresenter();
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isNewFragment = (savedInstanceState == null);
         presenter = createPresenter();
     }
-
 
     /**
      * Getter for the instance of the {@link BasePresenter}

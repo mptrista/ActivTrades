@@ -1,8 +1,10 @@
-package com.toshkin.activtrades.app;
+package com.toshkin.activtrades.app.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.v7.app.AppCompatDelegate;
+
+import com.toshkin.activtrades.app.BaseActivity;
 
 public abstract class BasePresenterActivity<PresenterType extends BasePresenter> extends BaseActivity {
 

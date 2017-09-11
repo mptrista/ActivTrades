@@ -28,4 +28,6 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    public abstract String TAG();
+
 }

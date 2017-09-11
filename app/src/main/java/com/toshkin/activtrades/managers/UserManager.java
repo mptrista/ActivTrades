@@ -1,4 +1,7 @@
 package com.toshkin.activtrades.managers;
 
-public class UserManager {
+public class UserManager extends BaseManager {
+    private UserManager() {
+
+    }
 }

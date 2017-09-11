@@ -1,4 +1,4 @@
-package com.toshkin.activtrades.app;
+package com.toshkin.activtrades.app.mvp;
 
 /**
  * <p>The abstract base presenter that needs to be inherited by fragment presenters.</p>
@@ -12,7 +12,6 @@ public abstract class BasePresenter<View> {
     private View view;
     private boolean isNewInstance;
 
-
     /**
      * Getter for the instance of the interface that handles the UI.
      *
@@ -21,7 +20,6 @@ public abstract class BasePresenter<View> {
     public View getView() {
         return view;
     }
-
 
     /**
      * Return true if the fragment that the presenter is attached to is in the resumed state.
@@ -39,7 +37,6 @@ public abstract class BasePresenter<View> {
         return isNewInstance;
     }
 
-
     /**
      * Takes view. The method is called in the {@link BasePresenterFragment#onResume()}.
      *
@@ -56,13 +53,11 @@ public abstract class BasePresenter<View> {
         this.view = view;
     }
 
-
     /**
      * Called during the onStart() of the attached fragment.
      */
     protected void onViewAttached() {
     }
-
 
     /**
      * Called during the onStop() of the attached fragment.
@@ -70,14 +65,12 @@ public abstract class BasePresenter<View> {
     protected void onViewDetached() {
     }
 
-
     /**
      * Called during the onDestroy() of the attached fragment. Here you can release resource.
      */
     protected void onViewDestroyed() {
 
     }
-
 
     /**
      * Drops view. The method is called in the {@link BasePresenterFragment#onPause()}.

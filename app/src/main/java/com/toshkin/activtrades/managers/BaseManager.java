@@ -1,4 +1,4 @@
 package com.toshkin.activtrades.managers;
 
-public class BaseManager {
+abstract class BaseManager {
 }

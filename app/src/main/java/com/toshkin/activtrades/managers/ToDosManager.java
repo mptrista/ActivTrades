@@ -1,4 +1,8 @@
 package com.toshkin.activtrades.managers;
 
-public class ToDosManager {
+public class ToDosManager extends BaseManager{
+
+    private ToDosManager() {
+
+    }
 }
