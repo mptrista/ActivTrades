@@ -115,7 +115,7 @@ public class PostsFragment extends BasePresenterFragment<PostsPresenter> impleme
     @Override
     public void onError(String message) {
         setEnableViews(true);
-        Snackbar.make(titleView, "Something went wrong, try again!", Snackbar.LENGTH_SHORT)
+        Snackbar.make(titleView, message, Snackbar.LENGTH_SHORT)
                 .setActionTextColor(Color.RED)
                 .show();
     }

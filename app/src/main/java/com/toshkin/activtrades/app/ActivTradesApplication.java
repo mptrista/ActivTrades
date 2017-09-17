@@ -37,7 +37,7 @@ public class ActivTradesApplication extends Application {
 
     public AlbumsManager getAlbumsManager() {
         if (albumsManager == null) {
-            albumsManager = new AlbumsManager(api);
+            albumsManager = new AlbumsManager(api, gson);
         }
         return albumsManager;
     }

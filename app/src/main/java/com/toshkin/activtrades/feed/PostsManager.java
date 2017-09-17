@@ -19,7 +19,6 @@ import retrofit2.Response;
 
 public class PostsManager extends BaseManager {
 
-    public static final String ERROR_CONNECTING_TO_THE_SERVER = "Error connecting to the server";
     private Gson gson;
 
     public PostsManager(API api, Gson gson) {

@@ -43,4 +43,12 @@ public interface API {
 
     @DELETE("/posts/{id}/comments/{comment_id}")
     Call<Void> deleteComment(@Path("id") int id, @Path("comment_id") int commentID);
+
+    // ALBUMS
+
+    @GET("/albums")
+    Call<JsonElement> getAlbums();
+
+    @GET("/albums/{id}/photos")
+    Call<JsonElement> getPhotos(@Path("id") int albumId);
 }
