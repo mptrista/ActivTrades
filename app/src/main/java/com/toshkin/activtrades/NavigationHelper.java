@@ -1,8 +1,8 @@
 package com.toshkin.activtrades;
 
 import com.toshkin.activtrades.app.mvp.BasePresenterFragment;
-import com.toshkin.activtrades.fragments.AlbumsFragment;
-import com.toshkin.activtrades.fragments.FeedFragment;
+import com.toshkin.activtrades.albums.AlbumsFragment;
+import com.toshkin.activtrades.feed.PostsFragment;
 import com.toshkin.activtrades.fragments.ProfileFragment;
 import com.toshkin.activtrades.fragments.ToDosFragment;
 
@@ -32,12 +32,12 @@ public class NavigationHelper {
 
     private HashMap<Screen, BasePresenterFragment> fragments = new HashMap<>();
 
-    public BasePresenterFragment getFragment(Screen screen) {
+    BasePresenterFragment getFragment(Screen screen) {
         BasePresenterFragment fragment = fragments.get(screen);
         if (fragment == null) {
             switch (screen) {
                 case FEED:
-                    fragment = FeedFragment.newInstance();
+                    fragment = PostsFragment.newInstance();
                     fragments.put(Screen.FEED, fragment);
                     break;
                 case TODOS:

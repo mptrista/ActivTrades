@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.toshkin.activtrades.app.ActivTradesApplication;
 import com.toshkin.activtrades.app.BaseFragment;
 
 /**
@@ -66,6 +67,10 @@ public abstract class BasePresenterFragment<PresenterType extends BasePresenter>
     public void onDestroy() {
         presenter.onViewDestroyed();
         super.onDestroy();
+    }
+
+    public ActivTradesApplication getApp() {
+        return (ActivTradesApplication) getActivity().getApplication();
     }
 }
 

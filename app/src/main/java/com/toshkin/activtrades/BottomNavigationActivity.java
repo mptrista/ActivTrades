@@ -12,7 +12,26 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        return onItemIdSelected(item.getItemId());
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
+        onItemIdSelected(navigation.getSelectedItemId());
+    }
+
+    private void openFragment(NavigationHelper.Screen screen) {
+        BasePresenterFragment fragment = NavigationHelper.getInstance().getFragment(screen);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment, fragment.TAG()).commit();
+    }
+
+    private boolean onItemIdSelected(int itemId) {
+        switch (itemId) {
             case R.id.navigation_feed:
                 openFragment(NavigationHelper.Screen.FEED);
                 return true;
@@ -28,19 +47,4 @@ public class BottomNavigationActivity extends AppCompatActivity implements Botto
         }
         return false;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(this);
-    }
-
-    private void openFragment(NavigationHelper.Screen screen) {
-        BasePresenterFragment fragment = NavigationHelper.getInstance().getFragment(screen);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment, fragment.TAG()).commit();
-    }
-
-
 }

@@ -21,7 +21,7 @@ public class ProfileFragment extends BasePresenterFragment<ProfilePresenter> imp
 
     @Override
     protected ProfilePresenter createPresenter() {
-        return null;
+        return new ProfilePresenter();
     }
 
     @Override

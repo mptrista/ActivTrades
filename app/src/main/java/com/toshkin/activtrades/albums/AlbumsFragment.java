@@ -1,4 +1,4 @@
-package com.toshkin.activtrades.fragments;
+package com.toshkin.activtrades.albums;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,11 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.toshkin.activtrades.R;
-import com.toshkin.activtrades.app.mvp.BasePresenter;
 import com.toshkin.activtrades.app.mvp.BasePresenterFragment;
-import com.toshkin.activtrades.views.AlbumsView;
 
-public class AlbumsFragment extends BasePresenterFragment implements AlbumsView {
+public class AlbumsFragment extends BasePresenterFragment<AlbumsPresenter> implements AlbumsView {
     public static final String TAG = AlbumsFragment.class.getSimpleName();
 
     public static AlbumsFragment newInstance() {
@@ -19,8 +17,8 @@ public class AlbumsFragment extends BasePresenterFragment implements AlbumsView 
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected AlbumsPresenter createPresenter() {
+        return new AlbumsPresenter();
     }
 
     @Override

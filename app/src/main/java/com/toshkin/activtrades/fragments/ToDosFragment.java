@@ -20,7 +20,7 @@ public class ToDosFragment extends BasePresenterFragment<ToDosPresenter> impleme
 
     @Override
     protected ToDosPresenter createPresenter() {
-        return null;
+        return new ToDosPresenter();
     }
 
     @Override
