@@ -22,6 +22,8 @@ class PostsAdapter extends BaseAdapter<Post, PostsAdapter.PostViewHolder> {
 
     public interface ItemActionListener {
         void onDeletePostRequest(Post post);
+
+        void onPostDetailRequest(Post post);
     }
 
     public void removePost(int id) {
@@ -73,6 +75,11 @@ class PostsAdapter extends BaseAdapter<Post, PostsAdapter.PostViewHolder> {
             imageButton.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onDeletePostRequest(post);
+                }
+            });
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onPostDetailRequest(post);
                 }
             });
         }

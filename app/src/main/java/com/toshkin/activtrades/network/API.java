@@ -36,11 +36,11 @@ public interface API {
     // COMMENTS
 
     @GET("/posts/{id}/comments")
-    Call<List<Comment>> getComments(@Path("id") int id);
+    Call<JsonElement> getComments(@Path("id") int id);
 
     @POST("/posts/{id}/comments")
-    Call<List<Comment>> addComment(@Path("id") int id, @Body Comment comment);
+    Call<Comment> addComment(@Path("id") int id, @Body Comment comment);
 
-    @DELETE("/posts/{id}/comments/{commend_id}")
-    Call<List<Comment>> addComment(@Path("id") int id, @Path("commend_id") String commentID);
+    @DELETE("/posts/{id}/comments/{comment_id}")
+    Call<Void> deleteComment(@Path("id") int id, @Path("comment_id") int commentID);
 }

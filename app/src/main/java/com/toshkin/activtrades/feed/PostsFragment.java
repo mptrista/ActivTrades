@@ -1,5 +1,6 @@
 package com.toshkin.activtrades.feed;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.ProgressBar;
 
 import com.toshkin.activtrades.R;
 import com.toshkin.activtrades.app.mvp.BasePresenterFragment;
+import com.toshkin.activtrades.feed.detail.PostDetailActivity;
 import com.toshkin.activtrades.network.pojos.Post;
 
 import java.util.List;
@@ -24,8 +26,8 @@ public class PostsFragment extends BasePresenterFragment<PostsPresenter> impleme
         PostsAdapter.ItemActionListener {
     public static final String TAG = PostsFragment.class.getSimpleName();
 
-    private RecyclerView postsRecyclerView;
     private PostsAdapter postsAdapter;
+    private RecyclerView postsRecyclerView;
     private ProgressBar progressBar;
     private EditText titleView;
     private EditText bodyView;
@@ -47,7 +49,9 @@ public class PostsFragment extends BasePresenterFragment<PostsPresenter> impleme
     @Override
     public void onStart() {
         super.onStart();
-        getPresenter().getPosts();
+        if (postsAdapter.isEmpty()) {
+            getPresenter().getPosts();
+        }
         postsAdapter.setActionListener(this);
     }
 
@@ -88,6 +92,15 @@ public class PostsFragment extends BasePresenterFragment<PostsPresenter> impleme
             }
         });
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        postsRecyclerView = null;
+        progressBar = null;
+        titleView = null;
+        bodyView = null;
     }
 
     private boolean validateInput() {
@@ -144,6 +157,13 @@ public class PostsFragment extends BasePresenterFragment<PostsPresenter> impleme
     @Override
     public void onDeletePostRequest(Post post) {
         getPresenter().deletePost(post);
+    }
+
+    @Override
+    public void onPostDetailRequest(Post post) {
+        Intent intent = new Intent(getContext(), PostDetailActivity.class);
+        intent.putExtra(PostDetailActivity.EXTRA_POST, post);
+        startActivity(intent);
     }
 
 }

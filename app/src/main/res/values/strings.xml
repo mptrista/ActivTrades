@@ -6,4 +6,7 @@
     <string name="title_profile">Profile</string>
     <string name="post_body">Post body</string>
     <string name="post_title">Post title</string>
+    <string name="add_a_new_post">New post</string>
+    <string name="comment">comment…</string>
+    <string name="label_anonymous">Anonymous</string>
 </resources>
