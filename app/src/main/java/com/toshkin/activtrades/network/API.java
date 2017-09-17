@@ -22,7 +22,7 @@ public interface API {
     //POSTS
 
     @POST("/posts")
-    Call<CreatedResponse> addPost(@Body Post post);
+    Call<Post> addPost(@Body Post post);
 
     @DELETE("/posts/{id}")
     Call<Void> deletePost(@Path("id") int id);

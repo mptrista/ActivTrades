@@ -1,12 +1,18 @@
 package com.toshkin.activtrades.feed;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.toshkin.activtrades.R;
 import com.toshkin.activtrades.app.mvp.BasePresenterFragment;
@@ -18,7 +24,11 @@ public class PostsFragment extends BasePresenterFragment<PostsPresenter> impleme
         PostsAdapter.ItemActionListener {
     public static final String TAG = PostsFragment.class.getSimpleName();
 
+    private RecyclerView postsRecyclerView;
     private PostsAdapter postsAdapter;
+    private ProgressBar progressBar;
+    private EditText titleView;
+    private EditText bodyView;
 
     public static PostsFragment newInstance() {
         return new PostsFragment();
@@ -51,28 +61,60 @@ public class PostsFragment extends BasePresenterFragment<PostsPresenter> impleme
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_posts, container, false);
-        RecyclerView profileRecyclerView = (RecyclerView) view.findViewById(R.id.profileRecyclerView);
+        postsRecyclerView = (RecyclerView) view.findViewById(R.id.profileRecyclerView);
         postsAdapter = new PostsAdapter();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setSmoothScrollbarEnabled(true);
-        profileRecyclerView.setAdapter(postsAdapter);
-        profileRecyclerView.setLayoutManager(linearLayoutManager);
+        postsRecyclerView.setAdapter(postsAdapter);
+        postsRecyclerView.setLayoutManager(linearLayoutManager);
+
+        progressBar = (ProgressBar) view.findViewById(R.id.loading_indicator);
+        titleView = (EditText) view.findViewById(R.id.post_title_text_view);
+        bodyView = (EditText) view.findViewById(R.id.post_body_text_view);
+        bodyView.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (validateInput()) {
+                    setEnableViews(false);
+                    getPresenter().addPost(titleView.getText().toString(), bodyView.getText().toString());
+                } else {
+                    Snackbar.make(titleView, "Title and Body should be filled",
+                            Snackbar.LENGTH_SHORT)
+                            .setActionTextColor(Color.RED)
+                            .show();
+                }
+                return true;
+            } else {
+                return false;
+            }
+        });
         return view;
+    }
+
+    private boolean validateInput() {
+        String title = titleView.getText().toString().trim();
+        if (TextUtils.isEmpty(title)) {
+            return false;
+        }
+        String body = bodyView.getText().toString().trim();
+        return !TextUtils.isEmpty(body);
     }
 
     @Override
     public void onError(String message) {
-
+        setEnableViews(true);
+        Snackbar.make(titleView, "Something went wrong, try again!", Snackbar.LENGTH_SHORT)
+                .setActionTextColor(Color.RED)
+                .show();
     }
 
     @Override
     public void showLoadingIndicator() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoadingIndicator() {
-
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -85,11 +127,23 @@ public class PostsFragment extends BasePresenterFragment<PostsPresenter> impleme
         postsAdapter.removePost(postId);
     }
 
+    @Override
+    public void onPostAdded(Post post) {
+        postsAdapter.addItemFirst(post);
+        setEnableViews(true);
+        titleView.setText("");
+        bodyView.setText("");
+        postsRecyclerView.smoothScrollToPosition(0);
+    }
+
+    private void setEnableViews(boolean enabled) {
+        titleView.setEnabled(enabled);
+        bodyView.setEnabled(enabled);
+    }
 
     @Override
     public void onDeletePostRequest(Post post) {
         getPresenter().deletePost(post);
     }
-
 
 }

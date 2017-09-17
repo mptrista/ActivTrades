@@ -4,4 +4,6 @@
     <string name="title_albums">Albums</string>
     <string name="title_todos">Todos</string>
     <string name="title_profile">Profile</string>
+    <string name="post_body">Post body</string>
+    <string name="post_title">Post title</string>
 </resources>

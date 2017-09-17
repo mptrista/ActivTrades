@@ -9,4 +9,5 @@ import java.util.List;
 public interface PostsView extends LoadingViewIndication, ErrorViewIndication{
     void onNewPosts(List<Post> posts);
     void onPostDeleted(int postId);
+    void onPostAdded(Post post);
 }

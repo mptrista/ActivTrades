@@ -42,6 +42,26 @@ public abstract class BaseAdapter<ItemType, VH extends RecyclerView.ViewHolder> 
         }
     }
 
+    public void addItemFirst(ItemType item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Null item provided.");
+        } else {
+            int startPosition = 0;
+            items.add(startPosition, item);
+            notifyItemRangeInserted(startPosition, 1);
+        }
+    }
+
+    public void addItemLast(ItemType item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Null item provided.");
+        } else {
+            int startPosition = getItemCount();
+            items.add(item);
+            notifyItemRangeInserted(startPosition, 1);
+        }
+    }
+
     public void clearItems() {
         int count = getItemCount();
         if (count > 0) {

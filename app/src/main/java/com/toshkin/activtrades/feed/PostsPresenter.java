@@ -61,4 +61,27 @@ class PostsPresenter extends BasePresenter<PostsView> {
     }
 
 
+    public void addPost(String title, String body) {
+        if (isOperational()) {
+            getView().showLoadingIndicator();
+        }
+        Post post = new Post(title, body);
+        manager.addPost(post, new Callback<Post, String>() {
+            @Override
+            public void onSuccess(Post post) {
+                if (isOperational()) {
+                    getView().hideLoadingIndicator();
+                    getView().onPostAdded(post);
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                if (isOperational()) {
+                    getView().hideLoadingIndicator();
+                    getView().onError(error);
+                }
+            }
+        });
+    }
 }
